@@ -1,0 +1,36 @@
+
+body {
+    background-color: #333;
+    color: #fff;
+}
+
+td.in-type, td.in-code, td.in-value {
+    font-family: monospace;
+    text-align: right;
+}
+
+td.loop-end {
+    border-top: 1px solid #777;
+}
+
+#sample-field {
+    position: fixed;
+    right: 20px;
+    width: calc(50% - 20px);
+    bottom: 20px;
+}
+
+#main-table {
+    border-collapse: collapse;
+}
+
+#main-table > tbody > tr > td:nth-child(4) {
+    padding-left: 50px;
+    border-left: 1px solid #777;
+}
+
+#main-table > tbody > tr > td:nth-child(5) {
+    padding-right: 50px;
+    border-right: 1px solid #777;
+}
+
