@@ -2,6 +2,9 @@
 const codeToCharMap = {
     36: 'h',
     33: 'u',  
+	42: 'SH',
+	29: 'CT',
+	47: 'v',
 };
 
 function codeToDisplay(code) {
@@ -64,7 +67,7 @@ $(document).ready(() => {
                 tr.append(tdValue);
                 tr.append($('<td>'));
             }
-            else {
+            else if (d['value'] == 0) {
                 tdValue.addClass('in-release-code');
                 tr.append($('<td>'));
                 tr.append(tdValue);
@@ -76,11 +79,17 @@ $(document).ready(() => {
             mainTable.append(tr);
             tr[0].scrollIntoView();
         }
-        else if (j['type'] == 'out-press') {
+        else if (j['type'] == 'out-action') {
             const d = j['data'];
             const tr = $('<tr>');
-            const tdValue = $('<td class="out-press-code out-code">')
-            tdValue.text(codeToDisplay(d['code']));
+            const tdCode = $('<td class="out-code">')
+			if (d['value'] == 1) {
+				tdCode.addClass('out-press-code');
+			}
+			else if (d['value'] == 0) {
+				tdCode.addClass('out-release-code');
+			}
+            tdCode.text(codeToDisplay(d['code']));
             
             tr.append($('<td>'));
             tr.append($('<td>'));
@@ -89,27 +98,14 @@ $(document).ready(() => {
             tr.append($('<td>'));
             tr.append($('<td>'));
             
-            tr.append(tdValue);
-            tr.append($('<td>'));
-            
-            mainTable.append(tr);
-            tr[0].scrollIntoView();
-        }
-        else if (j['type'] == 'out-release') {
-            const d = j['data'];
-            const tr = $('<tr>');
-            const tdValue = $('<td class="out-release-code out-code">')
-            tdValue.text(codeToDisplay(d['code']));
-            
-            tr.append($('<td>'));
-            tr.append($('<td>'));
-            tr.append($('<td>'));
-            
-            tr.append($('<td>'));
-            tr.append($('<td>'));
-            
-            tr.append($('<td>'));
-            tr.append(tdValue);
+			if (d['value'] == 1) {
+				tr.append(tdCode);
+				tr.append($('<td>'));
+			}
+			else if (d['value'] == 0) {
+				tr.append($('<td>'));
+				tr.append(tdCode);
+			}
             
             mainTable.append(tr);
             tr[0].scrollIntoView();
